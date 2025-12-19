@@ -1,114 +1,243 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>IA aplicada a la calidad del agua</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Machine Learning aplicado a la Calidad del Agua</title>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f6f8;
-      color: #333;
+    :root{
+      --accent: #0f766e;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --page-bg: #f4f7f9;
+      --shadow: 0 8px 24px rgba(15, 118, 110, 0.08);
+      --radius: 12px;
     }
 
-    header {
-      background: #0f766e;
-      color: white;
-      padding: 30px;
-      text-align: center;
+    html,body { margin:0; padding:0; font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif; background:var(--page-bg); color:#0f172a; }
+    .container { max-width:1100px; margin:28px auto; padding:20px; }
+
+    header.site {
+      background: linear-gradient(90deg,var(--accent), #0ea5a4);
+      color:#fff;
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow: var(--shadow);
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    header.site h1 { margin:0; font-size:1.6rem; letter-spacing: -0.5px; }
+    header.site p { margin:0; opacity:0.95; font-size:0.95rem; color:rgba(255,255,255,0.92) }
+
+    nav.toplinks { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+    .btn { background:#fff; color:var(--accent); padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:600; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .btn.secondary { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.12); }
+
+    .section { background:var(--card-bg); border-radius:12px; padding:22px; margin-top:20px; box-shadow: 0 6px 18px rgba(15, 23, 42, 0.03); }
+    .section h2 { margin-top:0; color:var(--accent); }
+    .muted { color:var(--muted); }
+
+    /* grid for images */
+    .images-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:18px; margin-top:14px; }
+    figure.card { background: linear-gradient(180deg,#fff,#fbfdff); border-radius:10px; padding:12px; box-shadow: 0 8px 20px rgba(2,6,23,0.05); margin:0; }
+    figure.card img { width:100%; height:auto; display:block; border-radius:8px; }
+    figure.card figcaption { font-weight:700; margin-top:10px; color:#0b3b36; }
+    figure.card p { margin:8px 0 0; color:#334155; font-size:0.95rem; }
+
+    /* responsive */
+    @media (max-width:820px){
+      .images-grid { grid-template-columns: 1fr; }
+      header.site { flex-direction:column; align-items:flex-start; gap:10px; }
     }
 
-    section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
-    }
+    /* table */
+    table.compare { width:100%; border-collapse:collapse; margin-top:12px; }
+    table.compare th, table.compare td { border:1px solid #e6eef0; padding:10px; text-align:center; }
+    table.compare th { background:#f8fafc; color:#06323b; }
 
-    h2 {
-      color: #0f766e;
-      margin-bottom: 10px;
-    }
-
-    p {
-      line-height: 1.6;
-    }
-
-    .app-container {
-      margin-top: 25px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-
-    iframe {
-      width: 100%;
-      height: 700px;
-      border: none;
-    }
-
-    footer {
-      background: #e5e7eb;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-    }
+    footer { margin-top:26px; text-align:center; color:var(--muted); font-size:0.95rem; }
+    .app-link { display:inline-block; margin-top:12px; background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:700; box-shadow: 0 8px 20px rgba(15,118,110,0.12); }
   </style>
 </head>
-
 <body>
 
-<header>
-  <h1>Machine Learning aplicado a la calidad del agua</h1>
-  <p>Predicción y evaluación de eficiencia en sistemas de tratamiento</p>
-</header>
+  <div class="container">
 
-<section>
-  <h2>📘 Descripción del proyecto</h2>
-  <p>
-    Este proyecto aplica técnicas de <strong>Machine Learning</strong> para el análisis
-    de la calidad del agua y la eficiencia de tratamiento en plantas de aguas residuales.
-    Se utilizan modelos de <strong>SVM</strong> y <strong>Random Forest</strong> como herramientas
-    predictivas y de apoyo a la toma de decisiones ambientales.
-  </p>
-</section>
+    <!-- HEADER -->
+    <header class="site">
+      <div style="flex:1">
+        <h1>Machine Learning aplicado a la Calidad del Agua</h1>
+        <p>Comparativa y aplicaciones: SVM (clasificación) & Random Forest (regresión). Interactividad mediante apps desplegadas en Streamlit.</p>
 
-<section>
-  <h2>🧠 Modelo SVM – Clasificación</h2>
-  <p>
-    El modelo SVM permite clasificar el estado del efluente tratado,
-    determinando si cumple o no con criterios de calidad ambiental
-    en función de variables físico-químicas.
-  </p>
+        <nav class="toplinks" aria-label="navegación rápida">
+          <a class="btn" href="#svm">1. Modelo SVM</a>
+          <a class="btn" href="#rf">2. Random Forest</a>
+          <a class="btn secondary" href="#model-comparison">Tabla comparativa</a>
+        </nav>
+      </div>
 
-  <p>
-    <strong>Modelo SVM – Clasificación de calidad de agua</strong><br>
-    <a href="https://ml-agua-apps-knkiqwjswab6uqn9vmkbcq.streamlit.app/" target="_blank">
-      👉 Abrir aplicación SVM
-    </a>
-  </p>
+      <div style="text-align:right; min-width:160px;">
+        <p style="font-weight:700; margin-bottom:6px">Equipo: Proyecto IA</p>
+        <p class="muted" style="font-size:0.9rem">Entrega final — Presentación</p>
+      </div>
+    </header>
 
-<section>
-  <h2>🌲 Modelo Random Forest – Regresión</h2>
-  <p>
-    El modelo Random Forest estima la <strong>eficiencia de remoción (%)</strong>
-    en el tratamiento de aguas residuales, considerando parámetros
-    como DBO, DQO, SST y caudal.
-  </p>
+    <!-- 1. SVM -->
+    <section id="svm" class="section" aria-labelledby="svm-title">
+      <h2 id="svm-title">1. Modelo SVM (Máquina de Vectores de Soporte)</h2>
 
-  <p>
-    <strong>Modelo Random Forest – Predicción de eficiencia</strong><br>
-    <a href="https://ml-agua-apps-5mqbxwmzatos9fzzzyxvxb.streamlit.app/" target="_blank">
-      👉 Abrir aplicación Random Forest
-    </a>
-  </p>
+      <h3>Descripción</h3>
+      <p>
+        El SVM (Support Vector Machine) es un algoritmo de aprendizaje supervisado que busca
+        el hiperplano que mejor separa las clases maximizado el margen entre los vectores de soporte.
+        Con kernels como RBF permite trabajar con fronteras no lineales.
+      </p>
 
-</section>
+      <h3>Características</h3>
+      <ul class="muted">
+        <li>Tipo: Supervisado (clasificación).</li>
+        <li>Bueno para espacios de alta dimensión (varias variables fisicoquímicas).</li>
+        <li>Robusto frente a overfitting si se regulariza correctamente.</li>
+      </ul>
 
-<footer>
-  <p>Proyecto académico – Ingeniería Ambiental</p>
-  <p>Machine Learning aplicado a la gestión del recurso hídrico</p>
-</footer>
+      <h3>Aplicaciones (ejemplos)</h3>
+      <p class="muted">Ejemplos de visualizaciones generadas con datos de prueba — la muestra estacional está destacada en los gráficos.</p>
+
+      <div class="images-grid" role="group" aria-label="Imágenes SVM">
+        <!-- Matriz de Confusión -->
+        <figure class="card">
+          <img id="img-matriz" src="" alt="Matriz de Confusión SVM">
+          <figcaption>Matriz de Confusión del Modelo (adaptado para ríos) - Época Húmeda</figcaption>
+          <p>
+            La matriz visualiza aciertos y errores sobre el conjunto de prueba; la predicción de la muestra estacional está marcada en rojo.
+            Observación: altos aciertos en "Buena" (~190 correctos), ligeras confusiones entre "Regular" y "Mala" (~20–30 casos).
+          </p>
+        </figure>
+
+        <!-- PCA -->
+        <figure class="card">
+          <img id="img-pca" src="" alt="PCA SVM">
+          <figcaption>Visualización PCA - Época Húmeda</figcaption>
+          <p>
+            Reducción a 2 componentes (~65–70% de varianza explicada). "Buena" forma cluster compacto; la muestra húmeda (X grande)
+            se ubica en el solapamiento Regular–Mala, indicando valores intermedios.
+          </p>
+        </figure>
+      </div>
+
+      <p><a class="app-link" href="https://ml-agua-apps-knkiqwjswab6uqn9vmkbcq.streamlit.app/" target="_blank" rel="noopener">Abrir aplicación interactiva SVM</a></p>
+    </section>
+
+    <!-- 2. Random Forest -->
+    <section id="rf" class="section" aria-labelledby="rf-title">
+      <h2 id="rf-title">2. Modelo Random Forest – Regresión</h2>
+
+      <h3>Descripción</h3>
+      <p>
+        Random Forest es un método ensemble que construye múltiples árboles de decisión y
+        combina sus predicciones para mejorar la precisión y reducir la varianza.
+        Para regresión se promedia la salida de cada árbol.
+      </p>
+
+      <h3>Características</h3>
+      <ul class="muted">
+        <li>Manejo de ruido y datos faltantes.</li>
+        <li>Estimación de importancia de variables.</li>
+        <li>Escalable y paralelo (rápido en producción).</li>
+      </ul>
+
+      <h3>Aplicaciones (ejemplos)</h3>
+      <p class="muted">Visualizaciones de evaluación del modelo (ejemplos): predicción vs real y análisis de residuos.</p>
+
+      <div class="images-grid" role="group" aria-label="Imágenes Random Forest">
+        <!-- Predicción vs Real -->
+        <figure class="card">
+          <img id="img-pred" src="" alt="Predicción vs Real Random Forest">
+          <figcaption>Predicción vs Valores Reales</figcaption>
+          <p>
+            Observación: los puntos se agrupan cerca de la línea ideal, indicando buena concordancia. Mayor dispersión en valores extremos.
+          </p>
+        </figure>
+
+        <!-- Residuos -->
+        <figure class="card">
+          <img id="img-res" src="" alt="Análisis de residuos Random Forest">
+          <figcaption>Análisis de Residuos</figcaption>
+          <p>
+            Observación: residuos distribuidos simétricamente alrededor de cero; la mayoría dentro de ±4%, lo que indica ausencia de sesgo.
+          </p>
+        </figure>
+      </div>
+
+      <p><a class="app-link" href="https://ml-agua-apps-5mqbxwmzatos9fzzzyxvxb.streamlit.app/" target="_blank" rel="noopener">Abrir aplicación interactiva Random Forest</a></p>
+    </section>
+
+    <!-- Comparación -->
+    <section id="model-comparison" class="section">
+      <h2>Comparación breve de los modelos</h2>
+
+      <table class="compare" aria-label="Comparación de modelos">
+        <thead>
+          <tr><th>Característica</th><th>SVM</th><th>Random Forest</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Tipo</td><td>Clasificación</td><td>Regresión (en este proyecto)</td></tr>
+          <tr><td>Relaciones no lineales</td><td>Moderado (con kernel)</td><td>Excelente</td></tr>
+          <tr><td>Interpretabilidad</td><td>Media</td><td>Alta (importancia de variables)</td></tr>
+          <tr><td>Velocidad</td><td>Variable</td><td>Rápido y paralelizable</td></tr>
+          <tr><td>Punto fuerte</td><td>Precisión en márgenes</td><td>Estabilidad y manejo de ruido</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer style="margin-top:20px;">
+      <p>Proyecto académico – Machine Learning aplicado a Ingeniería Ambiental</p>
+      <p class="muted">Desarrollado por el equipo — Presentación final</p>
+    </footer>
+
+  </div>
+
+  <!-- ---------- Script para carga flexible de imágenes (prueba ascii/acento, mayúsculas) ---------- -->
+  <script>
+    // Intentará en orden las variantes de nombre que se suelen usar.
+    function tryLoad(imgEl, candidates){
+      if(!imgEl) return;
+      let i=0;
+      function next(){
+        if(i>=candidates.length){
+          imgEl.alt = imgEl.alt + " (imagen no encontrada)";
+          imgEl.style.opacity = 0.6;
+          return;
+        }
+        const url = candidates[i++];
+        const test = new Image();
+        test.onload = function(){ imgEl.src = url; };
+        test.onerror = function(){ next(); };
+        test.src = url;
+      }
+      next();
+    }
+
+    // Mapeo de elementos y variantes de nombre (puedes editar si tus archivos tienen otros nombres)
+    tryLoad(document.getElementById('img-matriz'), [
+      'Matriz_Confusion.png', 'Matriz_Confusion.PNG',
+      'Matriz_Confusión.png', 'Matriz_Confusión.PNG'
+    ]);
+
+    tryLoad(document.getElementById('img-pca'), [
+      'PCA.png','PCA.PNG','pca.png'
+    ]);
+
+    tryLoad(document.getElementById('img-pred'), [
+      'Prediccion.png','Predicción.png','Prediccion.PNG'
+    ]);
+
+    tryLoad(document.getElementById('img-res'), [
+      'residuos.png','residuos.PNG','Residuos.png'
+    ]);
+  </script>
 
 </body>
 </html>
