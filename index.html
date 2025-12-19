@@ -2,95 +2,107 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Machine Learning aplicado a la calidad del agua</title>
+  <title>IA aplicada a la calidad del agua</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f5f7fb;
       margin: 0;
-      padding: 0;
-      line-height: 1.6;
+      background: #f4f6f8;
+      color: #333;
     }
+
     header {
-      background: #0f172a;
+      background: #0f766e;
       color: white;
-      padding: 40px;
+      padding: 30px;
       text-align: center;
     }
+
     section {
-      padding: 40px;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
-      background: white;
-      margin-top: 20px;
-      border-radius: 10px;
+      padding: 40px 20px;
     }
+
     h2 {
-      color: #0f172a;
+      color: #0f766e;
+      margin-bottom: 10px;
     }
+
+    p {
+      line-height: 1.6;
+    }
+
+    .app-container {
+      margin-top: 25px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
     iframe {
       width: 100%;
       height: 700px;
       border: none;
-      border-radius: 10px;
-      margin-top: 20px;
     }
-    img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-top: 15px;
+
+    footer {
+      background: #e5e7eb;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
     }
   </style>
 </head>
+
 <body>
 
 <header>
   <h1>Machine Learning aplicado a la calidad del agua</h1>
-  <p>Clasificación y predicción mediante SVM y Random Forest</p>
+  <p>Predicción y evaluación de eficiencia en sistemas de tratamiento</p>
 </header>
 
 <section>
-  <h2>1. Introducción</h2>
+  <h2>📘 Descripción del proyecto</h2>
   <p>
-    Este proyecto aplica técnicas de Machine Learning para el análisis de la calidad del agua
-    y la eficiencia de tratamiento de aguas residuales, utilizando modelos de
-    Clasificación (SVM) y Regresión (Random Forest).
+    Este proyecto aplica técnicas de <strong>Machine Learning</strong> para el análisis
+    de la calidad del agua y la eficiencia de tratamiento en plantas de aguas residuales.
+    Se utilizan modelos de <strong>SVM</strong> y <strong>Random Forest</strong> como herramientas
+    predictivas y de apoyo a la toma de decisiones ambientales.
   </p>
 </section>
 
 <section>
-  <h2>2. Clasificación de calidad de agua – SVM</h2>
+  <h2>🧠 Modelo SVM – Clasificación</h2>
   <p>
-    El modelo SVM clasifica la calidad del agua a partir de parámetros fisicoquímicos
-    como pH, turbidez y conductividad.
+    El modelo SVM permite clasificar el estado del efluente tratado,
+    determinando si cumple o no con criterios de calidad ambiental
+    en función de variables físico-químicas.
   </p>
 
-  <!-- AQUÍ PUEDES PONER UNA IMAGEN DE TU GRÁFICO -->
-  <!-- <img src="grafico_svm.png"> -->
-
-  <iframe src="https://ml-agua-apps-knkiqwjswab6uqn9vmkbcq.streamlit.app/"></iframe>
+  <div class="app-container">
+    <iframe src="https://ml-agua-apps-knkiqwjswab6uqn9vmkbcq.streamlit.app/"></iframe>
+  </div>
 </section>
 
 <section>
-  <h2>3. Predicción de eficiencia de tratamiento – Random Forest</h2>
+  <h2>🌲 Modelo Random Forest – Regresión</h2>
   <p>
-    El modelo Random Forest permite estimar la eficiencia de remoción (%) en plantas
-    de tratamiento, considerando variables como DBO, DQO, SST y caudal.
+    El modelo Random Forest estima la <strong>eficiencia de remoción (%)</strong>
+    en el tratamiento de aguas residuales, considerando parámetros
+    como DBO, DQO, SST y caudal.
   </p>
 
-  <!-- <img src="grafico_rf.png"> -->
-
-  <iframe src="https://ml-agua-apps-5mqbxwmzatos9fzzzyxvxb.streamlit.app/"></iframe>
+  <div class="app-container">
+    <iframe src="https://ml-agua-apps-5mqbxwmzatos9fzzzyxvxb.streamlit.app/"></iframe>
+  </div>
 </section>
 
-<section>
-  <h2>4. Conclusiones</h2>
-  <ul>
-    <li>Los modelos de Machine Learning permiten analizar de forma eficiente la calidad del agua.</li>
-    <li>Las aplicaciones interactivas facilitan la comprensión de los resultados.</li>
-    <li>La integración web mejora la comunicación de los modelos desarrollados.</li>
-  </ul>
-</section>
+<footer>
+  <p>Proyecto académico – Ingeniería Ambiental</p>
+  <p>Machine Learning aplicado a la gestión del recurso hídrico</p>
+</footer>
 
 </body>
 </html>
